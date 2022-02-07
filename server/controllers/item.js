@@ -31,3 +31,16 @@ export const fetchItems = async(req,res) => {
     }
 }
 
+export const deleteItem = async(req,res) => {
+    
+    try {
+
+        const item = await ItemSchema.deleteOne({itemId:req.params.id});
+        let response = await ItemSchema.find();
+        res.status(200).json(response);
+
+    } catch (error) {
+
+        res.status(500).json({message:error.message});
+    }
+}

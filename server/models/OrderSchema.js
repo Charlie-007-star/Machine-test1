@@ -15,7 +15,7 @@ const orderSchema = new Mongoose.Schema({
         required: true,
     },
     orderAmount : {
-        type: String,
+        type: Number,
         required: true,
     }
 });
