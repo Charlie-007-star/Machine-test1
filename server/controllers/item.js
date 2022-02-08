@@ -44,3 +44,46 @@ export const deleteItem = async(req,res) => {
         res.status(500).json({message:error.message});
     }
 }
+
+export const editItem = async(req,res) => {
+    
+        try {
+            console.log(req.params.id);
+            let response = await ItemSchema.findOne({itemId:req.params.id});
+            console.log(response);
+            res.status(200).json(response);
+    
+        } catch (error) {
+    
+            res.status(500).json({message:error.message});
+        }
+}
+
+export const updateItem = async(req,res) => {
+        
+        try {
+            
+            const {itemName,unitPrice,quantity,orderId,itemId} = req.body;
+            const item = await ItemSchema.updateOne({itemId:req.params.id},{itemName,unitPrice,quantity,orderId,itemId});
+            console.log(item);
+            res.status(200).json(item);
+        
+        } catch (error) {
+            
+            res.status(500).json({message:error.message});
+        }
+}
+
+export const currentItem = async(req,res) => {
+    
+    try {
+        console.log(req.params.id);
+        let response = await ItemSchema.findOne({itemId:req.params.id});
+        console.log(response);
+        res.status(200).json(response);
+
+    } catch (error) {
+
+        res.status(500).json({message:error.message});
+    }
+}
