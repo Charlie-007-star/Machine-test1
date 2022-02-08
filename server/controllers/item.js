@@ -7,7 +7,6 @@ export const item = async(req,res) => {
         let itemId = Math.floor(Math.random() * 10000) + 1;
         const item = new ItemSchema({itemId,itemName,unitPrice,quantity,orderId})
         await item.save();
-        console.log(item);
         res.status(200).json(item);
 
     } catch (error) {
@@ -18,11 +17,9 @@ export const item = async(req,res) => {
 
 export const fetchItems = async(req,res) => {
     try {
+
         const id = req.params.id;
-        console.log("order Id");
-        console.log(id);
         const items = await ItemSchema.find({orderId:id});
-        console.log(items);
         res.status(200).json(items);
 
     } catch (error) {
@@ -48,9 +45,8 @@ export const deleteItem = async(req,res) => {
 export const editItem = async(req,res) => {
     
         try {
-            console.log(req.params.id);
+           
             let response = await ItemSchema.findOne({itemId:req.params.id});
-            console.log(response);
             res.status(200).json(response);
     
         } catch (error) {
@@ -65,7 +61,6 @@ export const updateItem = async(req,res) => {
             
             const {itemName,unitPrice,quantity,orderId,itemId} = req.body;
             const item = await ItemSchema.updateOne({itemId:req.params.id},{itemName,unitPrice,quantity,orderId,itemId});
-            console.log(item);
             res.status(200).json(item);
         
         } catch (error) {
@@ -77,9 +72,8 @@ export const updateItem = async(req,res) => {
 export const currentItem = async(req,res) => {
     
     try {
-        console.log(req.params.id);
+        
         let response = await ItemSchema.findOne({itemId:req.params.id});
-        console.log(response);
         res.status(200).json(response);
 
     } catch (error) {

@@ -4,30 +4,17 @@ import { OrderSchema } from "../models/OrderSchema.js";
 export const newOrder = async(req,res) => {
     try {
 
-        let id = req.params.id;
-        console.log(id);
-        if(req.params.id === "undefined"){
-
-            console.log("new user");
-            let OrderId = Math.floor(Math.random() * 10000) + 1;
-            const data = {
-                orderDate: new Date(),
-                customer:"Tom hanks",
-                orderAmount: 0,
-                orderId: OrderId
-              };
-            let { orderDate, customer, orderAmount, orderId } = data;
-            const order = new OrderSchema({orderDate, customer, orderAmount, orderId});
-            console.log(order);
-           await order.save();
-           res.status(200).json(order);
-        
-        }else{
-            console.log("already user");
-            const order = await OrderSchema.findOne({orderId:id});
-            res.status(200).json(order);
-           
+        let {customer,orderDate,orderAmount} = req.body;
+        let OrderId = Math.floor(Math.random() * 10000) + 1;
+        let data = {
+            orderId:OrderId,
+            customer,
+            orderDate,
+            orderAmount
         }
+        let order = new OrderSchema({ ...data });
+        let result = await order.save();
+        res.status(200).json(result)
         
     } catch (error) {
 
@@ -67,6 +54,8 @@ export const fetchSingleOrder = async(req,res) => {
     try {
 
         const order = await OrderSchema.findOne({orderId:req.params.id});
+        console.log("iwda vanno?");
+        console.log(order);
         res.status(200).json(order);
 
     } catch (error) {

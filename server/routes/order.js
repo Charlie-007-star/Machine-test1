@@ -5,13 +5,13 @@ import { item,fetchItems,deleteItem, editItem, updateItem,currentItem } from "..
 
 const router = express.Router();
 
-router.post('/order/:id',newOrder);
+router.post('/home',newOrder);
 router.post('/itemm',item);
 router.get('/item/:id',fetchItems);
 router.get('/',fetchOrders);
 router.post('/:id',deleteOrder);
 router.post('/item/:id',deleteItem);
-router.post('/order/:id',fetchSingleOrder);
+router.post('/home/:id',fetchSingleOrder);
 router.post('/editItem/:id',editItem);
 router.post('/updateItem',updateItem);
 router.get('/editItem/:id',currentItem);
